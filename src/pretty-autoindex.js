@@ -19,7 +19,8 @@ Vue.component('directory', {
       return Vue.showProperty(propertyName, propertyConfig, property, index);
     },
     link: function() {
-      var path = this.path.replace(new RegExp('//', 'g'), '/');
+      var path = decodeURIComponent(this.path + '/');
+      path = path.replace(new RegExp('//', 'g'), '/');
       return path.replace(new RegExp('//', 'g'), '/');
     },
   },
@@ -49,7 +50,8 @@ Vue.component('file', {
       return conf.visibilityOptions;
     },
     link: function() {
-      var path = (conf.jsonApi + this.path).replace(new RegExp('//', 'g'), '/');
+      var path = decodeURIComponent(this.path);
+      path = (conf.jsonApi + path).replace(new RegExp('//', 'g'), '/');
       return path.replace(new RegExp('//', 'g'), '/');
     },
   },
@@ -106,7 +108,8 @@ const App = Vue.extend({
 
   computed: {
     pathArray: function() {
-      return this.path.split('/').filter((e) => e !== '');
+      var path = decodeURIComponent(this.path);
+      return path.split('/').filter((e) => e !== '');
     },
   },
 
@@ -116,7 +119,8 @@ const App = Vue.extend({
       this.loading = true;
 
       const xhr = new XMLHttpRequest();
-      var path = this.path.replace(new RegExp(conf.jsonApi, 'g'), '');
+      var path = decodeURIComponent(this.path);
+      path = path.replace(new RegExp(conf.jsonApi, 'g'), '');
       var address = (conf.jsonApi + path).replace(new RegExp('//', 'g'), '/');
       xhr.open('GET', address);
       xhr.onloadend = () => {
