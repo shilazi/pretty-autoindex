@@ -15,8 +15,8 @@ Vue.component('directory', {
     },
   },
   methods: {
-    showPropertyWrapper: function(propertyName, propertyConfig, property) {
-      return Vue.showProperty(propertyName, propertyConfig, property);
+    showPropertyWrapper: function(propertyName, propertyConfig, property, index) {
+      return Vue.showProperty(propertyName, propertyConfig, property, index);
     },
     link: function() {
       var path = this.path.replace(new RegExp('//', 'g'), '/');
@@ -35,7 +35,7 @@ Vue.component('directory', {
       <div v-for="(propertyName, propertyConfig) in visibilityOptions"
            class="flex-table-item pr-1 text-right">
         <template v-if="propertyConfig['use']">
-          {{ showPropertyWrapper(propertyName, propertyConfig, {date: this.mtime}) }}
+          {{ showPropertyWrapper(propertyName, propertyConfig, {date: this.mtime}, $index) }}
         </template>
       </div>
     </li>
@@ -54,8 +54,8 @@ Vue.component('file', {
     },
   },
   methods: {
-    showPropertyWrapper: function(propertyName, propertyConfig, property) {
-      return Vue.showProperty(propertyName, propertyConfig, property);
+    showPropertyWrapper: function(propertyName, propertyConfig, property, index) {
+      return Vue.showProperty(propertyName, propertyConfig, property, index);
     },
   },
   template: `
@@ -70,7 +70,7 @@ Vue.component('file', {
       <div v-for="(propertyName, propertyConfig) in visibilityOptions"
            class="flex-table-item pr-1 text-right">
         <template v-if="propertyConfig['use']">
-          {{ showPropertyWrapper(propertyName, propertyConfig, {date: this.mtime, size: this.size}) }}
+          {{ showPropertyWrapper(propertyName, propertyConfig, {date: this.mtime, size: this.size}, $index) }}
         </template>
       </div>
     </li>

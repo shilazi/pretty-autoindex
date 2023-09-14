@@ -4,6 +4,9 @@ const Helper = {
   install(Vue, options) {
 
     Vue.getReadableSize = function(size) {
+      if (size === 0) {
+        return '0B';
+    }
       var i = Math.floor(Math.log(size) / Math.log(1024));
       return (size / Math.pow(1024, i)).toFixed(2) * 1 + ['B', 'kB', 'MB', 'GB', 'TB'][i];
     }
@@ -42,7 +45,7 @@ const Helper = {
       return ret;
     }
 
-    Vue.showProperty = function(propertyName, propertyConfig, property) {
+    Vue.showProperty = function(propertyName, propertyConfig, property, index) {
         if(typeof property[propertyName] == 'undefined')
           return;
 
@@ -54,12 +57,13 @@ const Helper = {
           default:
             var ret = ''; break;
         }
-
-        return ret.length ? ret + ' - ' : '';
+        if (Object.keys(property).length > 1 && ret.length > 0 && index !== 0) {
+            return ' - ' + ret
+        }
+        return ret;
     }
 
   }
 };
 
 export default Helper;
-
