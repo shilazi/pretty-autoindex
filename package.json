@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spring-raining/pretty-autoindex.git"
+    "url": "git+https://github.com/shilazi/pretty-autoindex.git"
   },
   "author": "spring-raining",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/spring-raining/pretty-autoindex/issues"
+    "url": "https://github.com/shilazi/pretty-autoindex/issues"
   },
-  "homepage": "https://github.com/spring-raining/pretty-autoindex#readme",
+  "homepage": "https://github.com/shilazi/pretty-autoindex#readme",
   "devDependencies": {
     "babel": "^6.3.26",
     "babel-core": "^6.4.5",
