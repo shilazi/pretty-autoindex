@@ -163,7 +163,8 @@ const App = Vue.extend({
       <ul v-if="files !== null"
           class="files menu">
         <template v-if="pathArray.length > 0">
-          <directory :name=".."
+          <directory icon="file-directory"
+                     :name=".."
                      :path="'/' + pathArray.slice(0, -1).join('/')">
           </directory>
         </template>

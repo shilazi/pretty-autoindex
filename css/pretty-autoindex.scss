@@ -23,7 +23,7 @@
 
 .breadcrumb {
   font-size: 18px;
-  margin-left: 45px;
+  margin-left: 0;
   margin-bottom: 12px;
 
   .breadcrumb__root {
@@ -51,6 +51,7 @@
 }
 
 .files {
+  font-size: 14px;
   color: $gray;
 
   .columns {
