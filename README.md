@@ -69,6 +69,34 @@ Then, restart nginx and access `http://exmaple.com`.
 If you intend to open your page in public network, beware your nginx configuration
 and exclude files that you wouldn't like to expose from the directory.
 
+## Docker Support
+
+Use docker
+
+```sh-session
+docker run -itd \
+    -p 80:80 \
+    --name pretty-autoindex \
+    -v /path/to/you/want/to/show/:/usr/share/nginx/html/ \
+    shilazi/pretty-autoindex:latest
+```
+
+Use docker compose
+
+```sh-session
+version: '3.9'
+
+services:
+  pretty-autoindex:
+    image: shilazi/pretty-autoindex:latest
+    container_name: pretty-autoindex
+    ports:
+    - "80:80"
+    volumes:
+    - /path/to/you/want/to/show/:/usr/share/nginx/html/
+    restart: unless-stopped
+```
+
 ## Development
 
 To build pretty-autoindex,
