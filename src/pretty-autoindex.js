@@ -18,6 +18,10 @@ Vue.component('directory', {
     showPropertyWrapper: function(propertyName, propertyConfig, property) {
       return Vue.showProperty(propertyName, propertyConfig, property);
     },
+    link: function() {
+      var path = this.path.replace(new RegExp('//', 'g'), '/');
+      return path.replace(new RegExp('//', 'g'), '/');
+    },
   },
   template: `
     <li class="files__directory menu-item columns">
@@ -26,7 +30,7 @@ Vue.component('directory', {
           <span v-if="icon"
                 class="octicon octicon-{{ icon }}"></span>
         </div>
-        <a v-link="path">{{ name }}</a>
+        <a v-link="link()">{{ name }}</a>
       </div>
       <div v-for="(propertyName, propertyConfig) in visibilityOptions"
            class="flex-table-item pr-1 text-right">
@@ -45,7 +49,8 @@ Vue.component('file', {
       return conf.visibilityOptions;
     },
     link: function() {
-      return conf.address + this.path;
+      var path = (conf.jsonApi + this.path).replace(new RegExp('//', 'g'), '/');
+      return path.replace(new RegExp('//', 'g'), '/');
     },
   },
   methods: {
@@ -111,7 +116,8 @@ const App = Vue.extend({
       this.loading = true;
 
       const xhr = new XMLHttpRequest();
-      const address = conf.address + this.path;
+      var path = this.path.replace(new RegExp(conf.jsonApi, 'g'), '');
+      var address = (conf.jsonApi + path).replace(new RegExp('//', 'g'), '/');
       xhr.open('GET', address);
       xhr.onloadend = () => {
         if (xhr.status !== 200) {
@@ -143,7 +149,7 @@ const App = Vue.extend({
         <template v-for="(i, dir) in pathArray">
           <span class="breadcrumb__directory"
                 :class="{ 'last-one': pathArray.length === i + 1}">
-            <a v-link="'/' + pathArray.slice(0, i+1).join('/')">
+            <a v-link="'/' + pathArray.slice(0, i+1).join('/') + '/'">
               {{ dir }}
             </a>
           </span>
@@ -161,7 +167,7 @@ const App = Vue.extend({
           <directory v-if="file.type === 'directory'"
                      icon="file-directory"
                      :name="file.name"
-                     :path="path + '/' + file.name"
+                     :path="path + '/' + file.name + '/'"
                      :mtime="file.mtime">
            </directory>
           <file v-else

@@ -1,6 +1,6 @@
 var conf = {
-      name: 'pretty-autoindex',
-      address: 'http://192.168.10.108:10080',
+      name: 'index',
+      jsonApi: '/__autoindex__/',
 
       visibilityOptions: {
           size: {
